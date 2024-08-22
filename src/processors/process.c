@@ -53,26 +53,50 @@ bool    is_numeric(char **arg)
 	return true;
 }
 
+void print_stack(t_stack_node *a)
+{
+	t_stack_node	*tmp;
+	int				i;
+
+	i = 0;
+	tmp = a;
+	while (tmp)
+	{
+		printf("%d\n", tmp->value);
+		tmp = tmp->next;
+		i++;
+	}
+}
+
+void print_list(char **list)
+{
+	int i;
+
+	i = 0;
+	while (list[i])
+	{
+		printf("%s\n", list[i]);
+		i++;
+	}
+}
+
 void	process(t_stack_node **a, char **list, int i)
 {
 	int				value;
-	(void)a;
 
-	// if (!is_numeric(list))
-	// {
-	// 	ft_freestr(list);
-	// 	free(list);
-	// 	ft_free(a);
-	// 	error();
-	// }
+	if (!is_numeric(list))
+	{
+		print_list(list);
+		error();
+	}
 	while (list[i])
 	{
-		// printf("%s\n", list[i]);
 		value = atoi_modified(list[i]);
-		(void)value;
-		// stack_add_back(a, stack_new(value));
+		// printf("%d\n", value);
+		stack_add_back(a, stack_new(value));
 		i++;
 	}
+	// print_stack(*a);
 }
 
 void	subprocess(t_stack_node **a, char **argv)
@@ -80,9 +104,6 @@ void	subprocess(t_stack_node **a, char **argv)
 	char			**list;
 
 	list = ft_split(argv[1], ' ');
-	if (!list)
-		error();
 	process(a, list, 0);
 	ft_freestr(list);
-	free(list);
 }

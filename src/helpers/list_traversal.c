@@ -16,7 +16,7 @@ t_stack_node	*ft_lstlast(t_stack_node *lst)
 {
 	if (!lst)
 		return (NULL);
-	while (lst)
+	while (lst->next)
 		lst = lst -> next;
 	return (lst);
 }

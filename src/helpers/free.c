@@ -28,15 +28,15 @@ void	ft_free(t_stack_node **a)
 
 void	ft_freestr(char **lst)
 {
-	char	*n1;
+	int	i;
 
 	if (!lst)
 		return ;
-	while (*lst)
+	i = 0;
+	while (lst[i])
 	{
-		n1 = *lst;
-		lst++;
-		free(n1);
+		free(lst[i]);
+		i++;
 	}
-	*lst = NULL;
+	free(lst);
 }
