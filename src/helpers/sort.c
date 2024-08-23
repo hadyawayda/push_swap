@@ -12,16 +12,52 @@
 
 #include "../utils/headers/push_swap.h"
 
-void	sort(t_stack_node **a)
+void	sort_two_stack(t_stack_node **a)
 {
-	(void)a;
-	// int	size;
+	if ((*a)->value > (*a)->next->value)
+		sa(a);
+}
 
-	// size = stack_size(*a);
-	// if (size == 2)
-	// 	sort_two_stack(a);
-	// else if (size == 3)
-	// 	sort_three_stack(a);
-	// else
-		// sort_large_stack(a);
+void	sort_three_stack(t_stack_node **a)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = (*a)->value;
+	second = (*a)->next->value;
+	third = (*a)->next->next->value;
+	if (first > second && second < third && first < third)
+		sa(a);
+	else if (first > second && second > third && first > third)
+	{
+		sa(a);
+		rra(a);
+	}
+	else if (first > second && second < third && first > third)
+		ra(a);
+	else if (first < second && second > third && first < third)
+	{
+		sa(a);
+		ra(a);
+	}
+	else if (first < second && second > third && first > third)
+		rra(a);
+}
+
+void	sort_large_stack(t_stack_node **a)
+{
+	t_stack_node	*b;
+
+	b = NULL;
+	if (stack_size(*a) > 4)
+		pb(a, &b);
+	pb(a, &b);
+	while (stack_size(*a) > 3)
+	{
+		calculate_cheapest(a, &b);
+		pb(a, &b);
+	}
+	sort_three_stack(a);
+	push_all(a, &b);
 }

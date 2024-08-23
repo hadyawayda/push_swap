@@ -20,3 +20,16 @@ t_stack_node	*ft_lstlast(t_stack_node *lst)
 		lst = lst -> next;
 	return (lst);
 }
+
+int	stack_size(t_stack_node *a)
+{
+	int	size;
+
+	size = 0;
+	while (a)
+	{
+		size++;
+		a = a -> next;
+	}
+	return (size);
+}

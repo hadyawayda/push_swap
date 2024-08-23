@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_commands.c                                    :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hawayda <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 02:22:01 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/20 02:22:01 by hawayda          ###   ########.fr       */
+/*   Created: 2024/08/23 01:17:19 by hawayda           #+#    #+#             */
+/*   Updated: 2024/08/23 01:17:20 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../utils/headers/push_swap.h"
 
-void	push(t_stack_node **src, t_stack_node **dst)
+void	sort(t_stack_node **a)
 {
-	t_stack_node	*tmp;
+	int	size;
 
-	if (!src || !*src)
-		return ;
-	tmp = *src;
-	*src = (*src)->next;
-	tmp->next = *dst;
-	*dst = tmp;
-}
-
-void	pa(t_stack_node **a, t_stack_node **b)
-{
-	push(b, a);
-	write(1, "pa\n", 3);
-}
-
-void	pb(t_stack_node **a, t_stack_node **b)
-{
-	push(a, b);
-	write(1, "pb\n", 3);
-}
-
-void	push_all(t_stack_node **a, t_stack_node **b)
-{
-	while (*b != NULL)
-		pa(a, b);
+	size = stack_size(*a);
+	if (size == 2)
+		sort_two_stack(a);
+	else if (size == 3)
+		sort_three_stack(a);
+	else
+		sort_large_stack(a);
 }

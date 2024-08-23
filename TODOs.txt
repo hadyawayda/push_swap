@@ -1,1 +1,1 @@
-clean wildcard from makefiles --DONE
+Revert makefile to include CCFLAGS

@@ -39,10 +39,12 @@ t_stack_node		*ft_lstlast(t_stack_node *lst);
 t_stack_node		*stack_add_back(t_stack_node **stack, t_stack_node *new);
 
 bool				checkdup(t_stack_node *a);
+bool				checksorted(t_stack_node *a);
 
-int					checksorted(t_stack_node *a);
 int					atoi_modified(char *str);
+int					stack_size(t_stack_node *a);
 
+void				calculate_cheapest(t_stack_node **a, t_stack_node **b);
 void				process(t_stack_node **a, char **list, int i);
 void				subprocess(t_stack_node **a, char **argv);
 void				sort(t_stack_node **a);
@@ -53,8 +55,9 @@ void				sort_two_stack(t_stack_node **a);
 void				sort_three_stack(t_stack_node **a);
 void				sort_large_stack(t_stack_node **a);
 void				push(t_stack_node **a, t_stack_node **b);
-void				push_a(t_stack_node **a, t_stack_node **b);
-void				push_b(t_stack_node **a, t_stack_node **b);
+void				push_all(t_stack_node **a, t_stack_node **b);
+void				pa(t_stack_node **a, t_stack_node **b);
+void				pb(t_stack_node **a, t_stack_node **b);
 void				ra(t_stack_node **a);
 void				rb(t_stack_node **b);
 void				rr(t_stack_node **a, t_stack_node **b);

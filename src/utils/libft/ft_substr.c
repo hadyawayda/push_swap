@@ -51,5 +51,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	*(str + len) = '\0';
 	while (len-- && *s)
 		*str++ = *s++;
+	*str = '\0';
 	return (str_ptr);
 }

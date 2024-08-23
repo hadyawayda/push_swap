@@ -12,13 +12,13 @@
 
 #include "../utils/headers/push_swap.h"
 
-int	checksorted(t_stack_node *a)
+bool	checksorted(t_stack_node *a)
 {
 	while (a && a->next)
 	{
 		if (a->value > a->next->value)
-			return (0);
+			return (false);
 		a = a->next;
 	}
-	return (1);
+	return (true);
 }
