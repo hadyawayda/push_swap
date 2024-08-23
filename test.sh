@@ -4,13 +4,14 @@ make re
 # ./push_swap 7 6 5
 # ./push_swap "7 6 5"
 # ./push_swap "7" "6" "5"
-# ./push_swap "7" "6" "5" "4"
+# ./push_swap "7" "6" "5" "4" "3" "2"
 # ./push_swap "7" "6" "5" "-7"
 # ./push_swap 42
 # ./push_swap 3 2
 # ./push_swap 0 1 2 3
 # ./push_swap 0 1 2 3 4 5 6 7 8 9
 # ./push_swap 9 8 7 6 5 4 3 2 1 0
+./push_swap 5 2 7 1 6 3 9 4 8
 # ./push_swap c c c
 # ./push_swap 2 a 2
 # ./push_swap "2" "a" "2"

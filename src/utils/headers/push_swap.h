@@ -16,19 +16,13 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include <limits.h>
 
 typedef struct s_stack_node
 {
 	int					value;
-	int					current_position;
-	int					final_index;
-	int					push_price;
-	bool				above_median;
-	bool				cheapest;
-	struct s_stack_node	*target;
 	struct s_stack_node	*prev;
 	struct s_stack_node	*next;
 }	t_stack_node;
@@ -38,12 +32,17 @@ t_stack_node		*stack_new(int content);
 t_stack_node		*ft_lstlast(t_stack_node *lst);
 t_stack_node		*stack_add_back(t_stack_node **stack, t_stack_node *new);
 
+int					atoi_modified(char *str);
+int					stack_size(t_stack_node *a);
+int					find_optimal_position(t_stack_node *a, int value);
+int					calculate_cost(t_stack_node *stack_a, t_stack_node *stack_b, int position_a, int position_b);
+int					find_min(t_stack_node *a);
+
 bool				checkdup(t_stack_node *a);
 bool				checksorted(t_stack_node *a);
 
-int					atoi_modified(char *str);
-int					stack_size(t_stack_node *a);
-
+void				push_to_stackA(t_stack_node **a, t_stack_node **b);
+void				final_arrangement(t_stack_node **a);
 void				calculate_cheapest(t_stack_node **a, t_stack_node **b);
 void				process(t_stack_node **a, char **list, int i);
 void				subprocess(t_stack_node **a, char **argv);
@@ -55,7 +54,6 @@ void				sort_two_stack(t_stack_node **a);
 void				sort_three_stack(t_stack_node **a);
 void				sort_large_stack(t_stack_node **a);
 void				push(t_stack_node **a, t_stack_node **b);
-void				push_all(t_stack_node **a, t_stack_node **b);
 void				pa(t_stack_node **a, t_stack_node **b);
 void				pb(t_stack_node **a, t_stack_node **b);
 void				ra(t_stack_node **a);

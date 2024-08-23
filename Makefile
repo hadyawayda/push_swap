@@ -19,6 +19,7 @@ SRCS =			src/push_swap.c \
 				src/helpers/stack_traversal.c \
 				src/helpers/sort.c \
 				src/processors/algorithm.c \
+				src/processors/calculations.c \
 				src/processors/pre_process.c \
 				src/processors/process.c \
 				src/processors/sort.c \

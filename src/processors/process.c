@@ -56,10 +56,7 @@ void	process(t_stack_node **a, char **list, int i)
 	int				value;
 
 	if (!is_numeric(list, i))
-	{
-		write(2, "Error\n", 6);
 		return ;
-	}
 	while (list[i])
 	{
 		value = atoi_modified(list[i]);

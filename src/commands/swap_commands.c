@@ -32,6 +32,7 @@ void	sa(t_stack_node **a)
 	write(1, "sa\n", 3);
 }
 
+
 void	sb(t_stack_node **b)
 {
 	t_stack_node	*tmp;

@@ -12,48 +12,52 @@
 
 #include "../headers/push_swap.h"
 
-int	calculate_cost_to_top(t_stack_node *a, t_stack_node *target)
+void rotate_stacks(t_stack_node **stack_a, t_stack_node **stack_b, int pos_a, int pos_b, int size_a)
 {
-	int				cost;
-	t_stack_node	*current;
+    int size_b = stack_size(*stack_b);
 
-	cost = 0;
-	current = a;
-	while (current != target)
-	{
-		current = current->next;
-		cost++;
-	}
-	if (cost > stack_size(a) / 2)
-		cost = stack_size(a) - cost;
-	return (cost);
+	while (pos_a > 0 && pos_b > 0) {
+        rr(stack_a, stack_b);
+        pos_a--;
+        pos_b--;
+    }
+    while (pos_a < 0 && pos_b < 0) {
+        rrr(stack_a, stack_b);
+        pos_a++;
+        pos_b++;
+    }
+    while (pos_a > 0) { ra(stack_a); pos_a--; }
+    while (pos_a < 0) { rra(stack_a); pos_a++; }
+    while (pos_b > 0) { rb(stack_b); pos_b--; }
+    while (pos_b < 0) { rrb(stack_b); pos_b++; }
 }
 
-void	calculate_cheapest(t_stack_node **a, t_stack_node **b)
+void	calculate_best_position(t_stack_node **stack_a, t_stack_node **stack_b, int *best_pos_a, int *best_pos_b, int *min_cost, int size_a)
 {
-	t_stack_node	*cheapest_node;
-	t_stack_node	*current_node;
-	int				min_cost;
-	int				current_cost;
+	t_stack_node *current_a = *stack_a;
+	for (int i = 0; i < size_a; i++) {
+		int pos_b = find_optimal_position(*stack_b, current_a->value);
+		int cost = calculate_cost(*stack_a, *stack_b, i, pos_b);
 
-	current_node = *a;
-	cheapest_node = NULL;
-	min_cost = INT_MAX;
-	while (current_node)
-	{
-		current_cost = calculate_cost_to_top(*a, current_node);
-		if (current_cost < min_cost)
-		{
-			min_cost = current_cost;
-			cheapest_node = current_node;
+		if (cost < *min_cost) {
+			*min_cost = cost;
+			*best_pos_a = i;
+			*best_pos_b = pos_b;
 		}
-		current_node = current_node->next;
+		// current_a = current_a->next;
 	}
-	while (*a != cheapest_node)
-	{
-		if (calculate_cost_to_top(*a, cheapest_node) <= stack_size(*a) / 2)
-			ra(a);
-		else
-			rra(a);
-	}
+}
+
+void	calculate_cheapest(t_stack_node **stack_a, t_stack_node **stack_b)
+{
+	int min_cost = INT_MAX;
+	int best_pos_a = 0;
+	int best_pos_b = 0;
+    int size_a = stack_size(*stack_a);
+
+	calculate_best_position(stack_a, stack_b, &best_pos_a, &best_pos_b, &min_cost, size_a);
+
+	rotate_stacks(stack_a, stack_b, best_pos_a, best_pos_b, size_a);
+
+	pb(stack_a, stack_b);
 }

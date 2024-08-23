@@ -21,15 +21,15 @@ t_stack_node	*ft_lstlast(t_stack_node *lst)
 	return (lst);
 }
 
-int	stack_size(t_stack_node *a)
+int	stack_size(t_stack_node *stack)
 {
 	int	size;
 
 	size = 0;
-	while (a)
+	while (stack)
 	{
 		size++;
-		a = a -> next;
+		stack = stack -> next;
 	}
 	return (size);
 }
