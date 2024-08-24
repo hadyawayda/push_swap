@@ -42,6 +42,7 @@ int					find_min(t_stack_node *a);
 bool				checkdup(t_stack_node *a);
 bool				checksorted(t_stack_node *a);
 
+void				rotate_stacks(t_stack_node **stack_a, t_stack_node **stack_b, int pos_a, int pos_b, int size_a);
 void				print_stack(t_stack_node *a);
 void				merge_stackB_to_stackA(t_stack_node **a, t_stack_node **b);
 void				final_arrangement(t_stack_node **a);
@@ -55,7 +56,6 @@ void				error(void);
 void				sort_two_stack(t_stack_node **a);
 void				sort_three_stack(t_stack_node **a);
 void				sort_large_stack(t_stack_node **a);
-void				push(t_stack_node **a, t_stack_node **b);
 void				pa(t_stack_node **a, t_stack_node **b);
 void				pb(t_stack_node **a, t_stack_node **b);
 void				ra(t_stack_node **a);

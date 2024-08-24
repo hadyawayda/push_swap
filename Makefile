@@ -22,6 +22,7 @@ SRCS =			src/push_swap.c \
 				src/processors/calculations.c \
 				src/processors/pre_process.c \
 				src/processors/process.c \
+				src/processors/rotate_stacks.c \
 				src/processors/sort.c \
 				src/processors/stack.c \
 

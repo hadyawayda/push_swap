@@ -30,33 +30,32 @@ void	sort_three_stack(t_stack_node **a)
 	if (first > second && second < third && first < third)
 		sa(a);
 	else if (first > second && second > third)
-    {
-        sa(a);
-        rra(a);
-    }
-    else if (first > second && second < third && first > third)
-        ra(a);
-    else if (first < second && second > third && first < third)
-    {
-        sa(a);
-        ra(a);
-    }
-    else if (first < second && second > third && first > third)
-        rra(a);
+	{
+		sa(a);
+		rra(a);
+	}
+	else if (first > second && second < third && first > third)
+		ra(a);
+	else if (first < second && second > third && first < third)
+	{
+		sa(a);
+		ra(a);
+	}
+	else if (first < second && second > third && first > third)
+		rra(a);
 }
 
 void	sort_large_stack(t_stack_node **a)
 {
-	t_stack_node *b = NULL;
-    if (stack_size(*a) > 4)
-        pb(a, &b);
-    pb(a, &b);
-    
-    while (stack_size(*a) > 3) {
-        calculate_cheapest(a, &b);
-    }
-    
-    sort_three_stack(a);
-    merge_stackB_to_stackA(a, &b);
-    final_arrangement(a); // 100% correct
+	t_stack_node *b;
+
+	b = NULL;
+	if (stack_size(*a) > 4)
+		pb(a, &b);
+	pb(a, &b);
+	while (stack_size(*a) > 3)
+		calculate_cheapest(a, &b);
+	sort_three_stack(a);
+	merge_stackB_to_stackA(a, &b);
+	final_arrangement(a);
 }

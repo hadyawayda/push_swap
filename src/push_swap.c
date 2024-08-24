@@ -27,6 +27,5 @@ int	main(int argc, char **argv)
 	if (!checksorted(a))
 		sort(&a);
 	ft_free(&a);
-	printf("total operations: %d\n", counter);
 	return (0);
 }
