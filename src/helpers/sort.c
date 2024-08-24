@@ -45,42 +45,18 @@ void	sort_three_stack(t_stack_node **a)
         rra(a);
 }
 
-
-// Helper function for small stacks
-void sort_small_stack(t_stack_node **a) {
-    int size = stack_size(*a);
-
-    if (size <= 1) return;
-    if (size == 2) {
-        sort_two_stack(a);
-        return;
-    }
-    if (size == 3) {
-        sort_three_stack(a);
-        return;
-    }
-}
-
 void	sort_large_stack(t_stack_node **a)
 {
 	t_stack_node *b = NULL;
-    
-    // Pre-sorting for small stacks
-    if (stack_size(*a) <= 5) {
-        sort_small_stack(a);
-        return;
-    }
-    
-    // Initial push to B
-    pb(a, &b);
+    if (stack_size(*a) > 4)
+        pb(a, &b);
     pb(a, &b);
     
-    // Main sorting loop
     while (stack_size(*a) > 3) {
         calculate_cheapest(a, &b);
     }
     
     sort_three_stack(a);
-    push_to_stackA(a, &b);
+    // push_to_stackA(a, &b);
     final_arrangement(a);
 }
