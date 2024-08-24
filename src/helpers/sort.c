@@ -57,6 +57,6 @@ void	sort_large_stack(t_stack_node **a)
     }
     
     sort_three_stack(a);
-    // push_to_stackA(a, &b);
-    final_arrangement(a);
+    merge_stackB_to_stackA(a, &b);
+    final_arrangement(a); // 100% correct
 }

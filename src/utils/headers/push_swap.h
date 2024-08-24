@@ -43,7 +43,7 @@ bool				checkdup(t_stack_node *a);
 bool				checksorted(t_stack_node *a);
 
 void				print_stack(t_stack_node *a);
-void				push_to_stackA(t_stack_node **a, t_stack_node **b);
+void				merge_stackB_to_stackA(t_stack_node **a, t_stack_node **b);
 void				final_arrangement(t_stack_node **a);
 void				calculate_cheapest(t_stack_node **a, t_stack_node **b);
 void				process(t_stack_node **a, char **list, int i);

@@ -12,20 +12,45 @@
 
 #include "../headers/push_swap.h"
 
-void rotate_stacks(t_stack_node **stack_a, t_stack_node **stack_b, int pos_a, int pos_b, int size_a)
-{
-    if (pos_a <= stack_size(*stack_a) / 2) {
-		for (int i = 0; i < pos_a; i++) ra(stack_a);
-	} else {
-		for (int i = 0; i < stack_size(*stack_a) - pos_a; i++) rra(stack_a);
-	}
+void rotate_stacks(t_stack_node **stack_a, t_stack_node **stack_b, int pos_a, int pos_b, int size_a) {
+    int size_b = stack_size(*stack_b);
 
-	if (pos_b <= stack_size(*stack_b) / 2) {
-		for (int i = 0; i < pos_b; i++) rb(stack_b);
-	} else {
-		for (int i = 0; i < stack_size(*stack_b) - pos_b; i++) rrb(stack_b);
-	}
+    // Case 1: Rotate both stacks using `rr`
+    if (pos_a <= size_a / 2 && pos_b <= size_b / 2) {
+        while (pos_a > 0 && pos_b > 0) {
+            rr(stack_a, stack_b);
+            pos_a--;
+            pos_b--;
+        }
+        while (pos_a-- > 0) ra(stack_a);
+        while (pos_b-- > 0) rb(stack_b);
+    }
+    // Case 2: Reverse rotate both stacks using `rrr`
+    else if (pos_a > size_a / 2 && pos_b > size_b / 2) {
+        while (pos_a < size_a && pos_b < size_b) {
+            rrr(stack_a, stack_b);
+            pos_a++;
+            pos_b++;
+        }
+        while (pos_a++ < size_a) rra(stack_a);
+        while (pos_b++ < size_b) rrb(stack_b);
+    }
+    // Case 3: Rotate stack_a and reverse rotate stack_b, or vice versa
+    else {
+        if (pos_a <= size_a / 2) {
+            while (pos_a-- > 0) ra(stack_a);
+        } else {
+            while (pos_a++ < size_a) rra(stack_a);
+        }
+
+        if (pos_b <= size_b / 2) {
+            while (pos_b-- > 0) rb(stack_b);
+        } else {
+            while (pos_b++ < size_b) rrb(stack_b);
+        }
+    }
 }
+
 
 void	calculate_best_position(t_stack_node **stack_a, t_stack_node **stack_b, int *best_pos_a, int *best_pos_b, int *min_cost, int size_a)
 {
