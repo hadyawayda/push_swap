@@ -13,7 +13,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-extern int counter;
 # include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -67,5 +66,6 @@ void				rrr(t_stack_node **a, t_stack_node **b);
 void				sa(t_stack_node **a);
 void				sb(t_stack_node **b);
 void				ss(t_stack_node **a, t_stack_node **b);
+void				ft_error_ch(void);
 
 #endif

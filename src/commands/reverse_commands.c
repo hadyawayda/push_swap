@@ -28,27 +28,21 @@ void reverse_rotate(t_stack_node **stack)
     second_last->next = NULL;
 }
 
-// rra : reverse rotate a - shift down all elements of stack a by 1
 void rra(t_stack_node **a)
 {
     reverse_rotate(a);
     write(1, "rra\n", 4);
-    counter++;
 }
 
-// rrb : reverse rotate b - shift down all elements of stack b by 1
 void rrb(t_stack_node **b)
 {
     reverse_rotate(b);
     write(1, "rrb\n", 4);
-    counter++;
 }
 
-// rrr : rra and rrb at the same time
 void rrr(t_stack_node **a, t_stack_node **b)
 {
     reverse_rotate(a);
     reverse_rotate(b);
     write(1, "rrr\n", 4);
-    counter--;
 }

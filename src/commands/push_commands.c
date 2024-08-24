@@ -28,12 +28,10 @@ void	pa(t_stack_node **a, t_stack_node **b)
 {
 	push(b, a);
 	write(1, "pa\n", 3);
-	counter++;
 }
 
 void	pb(t_stack_node **a, t_stack_node **b)
 {
 	push(a, b);
 	write(1, "pb\n", 3);
-	counter++;
 }

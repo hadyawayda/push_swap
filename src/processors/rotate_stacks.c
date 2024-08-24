@@ -86,7 +86,8 @@ void	rotate_stacks(t_stack_node **stack_a, t_stack_node **stack_b, int pos_a, in
 		rotate_both_rr(stack_a, stack_b, &pos_a, &pos_b);
 	else if (pos_a > size_a / 2 && pos_b > size_b / 2)
 		reverse_rotate_both_rrr(stack_a, stack_b, &pos_a, &pos_b, size_a, size_b);
-	else {
+	else
+	{
 		rotate_stack_a(stack_a, pos_a, size_a);
     	rotate_stack_b(stack_b, pos_b, size_b);
 	}

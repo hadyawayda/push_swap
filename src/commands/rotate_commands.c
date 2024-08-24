@@ -24,27 +24,21 @@ void rotate(t_stack_node **stack)
     last->next->next = NULL;
 }
 
-// ra : rotate a - shift up all elements of stack a by 1
 void ra(t_stack_node **a)
 {
     rotate(a);
     write(1, "ra\n", 3);
-    counter++;
 }
 
-// rb : rotate b - shift up all elements of stack b by 1
 void rb(t_stack_node **b)
 {
     rotate(b);
     write(1, "rb\n", 3);
-    counter++;
 }
 
-// rr : ra and rb at the same time
 void rr(t_stack_node **a, t_stack_node **b)
 {
     rotate(a);
     rotate(b);
     write(1, "rr\n", 3);
-    counter--;
 }
