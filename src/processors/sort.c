@@ -33,5 +33,5 @@ void	sort(t_stack_node **a)
 		sort_three_stack(a);
 	else
 		sort_large_stack(a);
-	// print_stack(*a);
+	print_stack(*a);
 }

@@ -61,7 +61,7 @@ int find_optimal_position(t_stack_node *stack, int value) {
         
         prev_value = current->value;
         current = current->next;
-        if (!current) current = stack; // Loop back to start if we reach the end
+        if (!current) current = stack;
     }
     
     return 0;
