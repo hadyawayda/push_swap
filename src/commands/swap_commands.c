@@ -12,50 +12,34 @@
 
 #include "../utils/headers/push_swap.h"
 
-void	sa(t_stack_node **a)
+void swap(t_stack_node **stack)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*tmp2;
-
-	tmp = *a;
-	tmp2 = *a;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp2 = tmp->next;
-		tmp = tmp->next;
-	}
-	tmp = *a;
-	*a = tmp->next;
-	tmp->next = NULL;
-	tmp2->next = tmp;
-	write(1, "sa\n", 3);
+    if (!*stack || !(*stack)->next)
+        return;
+    t_stack_node *temp = *stack;
+    *stack = (*stack)->next;
+    temp->next = (*stack)->next;
+    (*stack)->next = temp;
 }
 
-
-void	sb(t_stack_node **b)
+void sa(t_stack_node **a)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*tmp2;
-
-	tmp = *b;
-	tmp2 = *b;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp2 = tmp->next;
-		tmp = tmp->next;
-	}
-	tmp = *b;
-	*b = tmp->next;
-	tmp->next = NULL;
-	tmp2->next = tmp;
-	write(1, "sb\n", 3);
+    swap(a);
+    write(1, "sa\n", 3);
+    counter++;
 }
 
-void	ss(t_stack_node **a, t_stack_node **b)
+void sb(t_stack_node **b)
 {
-	sa(a);
-	sb(b);
-	write(1, "ss\n", 3);
+    swap(b);
+    write(1, "sb\n", 3);
+    counter++;
+}
+
+void ss(t_stack_node **a, t_stack_node **b)
+{
+    swap(a);
+    swap(b);
+    write(1, "ss\n", 3);
+    counter--;
 }

@@ -12,49 +12,43 @@
 
 #include "../utils/headers/push_swap.h"
 
-void	rra(t_stack_node **a)
+void reverse_rotate(t_stack_node **stack)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*tmp2;
-
-	tmp = *a;
-	tmp2 = *a;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp2 = tmp->next;
-		tmp = tmp->next;
-	}
-	tmp = *a;
-	*a = tmp->next;
-	tmp->next = NULL;
-	tmp2->next = tmp;
-	write(1, "rra\n", 4);
+    if (!*stack || !(*stack)->next)
+        return;
+    t_stack_node *last = *stack;
+    t_stack_node *second_last = NULL;
+    while (last->next)
+    {
+        second_last = last;
+        last = last->next;
+    }
+    last->next = *stack;
+    *stack = last;
+    second_last->next = NULL;
 }
 
-void	rrb(t_stack_node **b)
+// rra : reverse rotate a - shift down all elements of stack a by 1
+void rra(t_stack_node **a)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*tmp2;
-
-	tmp = *b;
-	tmp2 = *b;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp2 = tmp->next;
-		tmp = tmp->next;
-	}
-	tmp = *b;
-	*b = tmp->next;
-	tmp->next = NULL;
-	tmp2->next = tmp;
-	write(1, "rrb\n", 4);
+    reverse_rotate(a);
+    write(1, "rra\n", 4);
+    counter++;
 }
 
-void	rrr(t_stack_node **a, t_stack_node **b)
+// rrb : reverse rotate b - shift down all elements of stack b by 1
+void rrb(t_stack_node **b)
 {
-	rra(a);
-	rrb(b);
-	write(1, "rrr\n", 4);
+    reverse_rotate(b);
+    write(1, "rrb\n", 4);
+    counter++;
+}
+
+// rrr : rra and rrb at the same time
+void rrr(t_stack_node **a, t_stack_node **b)
+{
+    reverse_rotate(a);
+    reverse_rotate(b);
+    write(1, "rrr\n", 4);
+    counter--;
 }

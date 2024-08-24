@@ -38,28 +38,30 @@ int find_optimal_position(t_stack_node *stack, int value) {
     int position = 0;
     int min = find_min(stack);
     int max = find_max(stack);
+    int size = stack_size(stack);
     
     if (value < min || value > max) {
-        // Find position of max
-        while (current->value != max) {
+        while (current && current->value != max) {
             position++;
             current = current->next;
         }
-        return (position + 1) % stack_size(stack);
+        return (position + 1) % size;
     }
     
-    int prev_value = stack->value;
-    current = current->next;
-    position = 1;
+     current = stack;
+    int prev_value = (current->next) ? current->value : min;
     
-    while (current != stack) {
+    for (int i = 0; i < size; i++) {
+        int next_value = (current->next) ? current->next->value : max;
+        
         if ((value > prev_value && value < current->value) ||
             (prev_value > current->value && (value > prev_value || value < current->value))) {
-            return position;
+            return i;
         }
+        
         prev_value = current->value;
         current = current->next;
-        position++;
+        if (!current) current = stack; // Loop back to start if we reach the end
     }
     
     return 0;

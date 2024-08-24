@@ -12,6 +12,8 @@
 
 #include "utils/headers/push_swap.h"
 
+int counter = 0;
+
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
@@ -25,5 +27,6 @@ int	main(int argc, char **argv)
 	if (!checksorted(a))
 		sort(&a);
 	ft_free(&a);
+	printf("total operations: %d\n", counter);
 	return (0);
 }

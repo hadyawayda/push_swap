@@ -12,6 +12,16 @@
 
 #include "../utils/headers/push_swap.h"
 
+void	print_stack(t_stack_node *a)
+{
+	while (a)
+	{
+		printf("%d ", a->value);
+		a = a->next;
+	}
+	printf("\n");
+}
+
 void	sort(t_stack_node **a)
 {
 	int	size;
@@ -23,4 +33,5 @@ void	sort(t_stack_node **a)
 		sort_three_stack(a);
 	else
 		sort_large_stack(a);
+	// print_stack(*a);
 }

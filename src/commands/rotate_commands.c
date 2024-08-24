@@ -12,49 +12,39 @@
 
 #include "../utils/headers/push_swap.h"
 
-void	ra(t_stack_node **a)
+void rotate(t_stack_node **stack)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*tmp2;
-
-	tmp = *a;
-	tmp2 = *a;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp2 = tmp->next;
-		tmp = tmp->next;
-	}
-	tmp = *a;
-	*a = tmp->next;
-	tmp->next = NULL;
-	tmp2->next = tmp;
-	write(1, "ra\n", 3);
+    if (!*stack || !(*stack)->next)
+        return;
+    t_stack_node *last = *stack;
+    while (last->next)
+        last = last->next;
+    last->next = *stack;
+    *stack = (*stack)->next;
+    last->next->next = NULL;
 }
 
-void	rb(t_stack_node **b)
+// ra : rotate a - shift up all elements of stack a by 1
+void ra(t_stack_node **a)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*tmp2;
-
-	tmp = *b;
-	tmp2 = *b;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp2 = tmp->next;
-		tmp = tmp->next;
-	}
-	tmp = *b;
-	*b = tmp->next;
-	tmp->next = NULL;
-	tmp2->next = tmp;
-	write(1, "rb\n", 3);
+    rotate(a);
+    write(1, "ra\n", 3);
+    counter++;
 }
 
-void	rr(t_stack_node **a, t_stack_node **b)
+// rb : rotate b - shift up all elements of stack b by 1
+void rb(t_stack_node **b)
 {
-	ra(a);
-	rb(b);
-	write(1, "rr\n", 3);
+    rotate(b);
+    write(1, "rb\n", 3);
+    counter++;
+}
+
+// rr : ra and rb at the same time
+void rr(t_stack_node **a, t_stack_node **b)
+{
+    rotate(a);
+    rotate(b);
+    write(1, "rr\n", 3);
+    counter--;
 }

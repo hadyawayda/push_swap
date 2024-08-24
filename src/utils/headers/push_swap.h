@@ -13,6 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+extern int counter;
 # include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -41,6 +42,7 @@ int					find_min(t_stack_node *a);
 bool				checkdup(t_stack_node *a);
 bool				checksorted(t_stack_node *a);
 
+void				print_stack(t_stack_node *a);
 void				push_to_stackA(t_stack_node **a, t_stack_node **b);
 void				final_arrangement(t_stack_node **a);
 void				calculate_cheapest(t_stack_node **a, t_stack_node **b);

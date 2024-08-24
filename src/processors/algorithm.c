@@ -34,18 +34,18 @@ void rotate_stacks(t_stack_node **stack_a, t_stack_node **stack_b, int pos_a, in
 
 void	calculate_best_position(t_stack_node **stack_a, t_stack_node **stack_b, int *best_pos_a, int *best_pos_b, int *min_cost, int size_a)
 {
-	t_stack_node *current_a = *stack_a;
-	for (int i = 0; i < size_a; i++) {
-		int pos_b = find_optimal_position(*stack_b, current_a->value);
-		int cost = calculate_cost(*stack_a, *stack_b, i, pos_b);
+	// t_stack_node *current_a = *stack_a;
+	// for (int i = 0; i < size_a; i++) {
+	// 	int pos_b = find_optimal_position(*stack_b, current_a->value);
+	// 	int cost = calculate_cost(*stack_a, *stack_b, i, pos_b);
 
-		if (cost < *min_cost) {
-			*min_cost = cost;
-			*best_pos_a = i;
-			*best_pos_b = pos_b;
-		}
-		// current_a = current_a->next;
-	}
+	// 	if (cost < *min_cost) {
+	// 		*min_cost = cost;
+	// 		*best_pos_a = i;
+	// 		*best_pos_b = pos_b;
+	// 	}
+	// 	current_a = current_a->next;
+	// }
 }
 
 void	calculate_cheapest(t_stack_node **stack_a, t_stack_node **stack_b)
