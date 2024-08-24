@@ -1,7 +1,7 @@
 NAME =			push_swap
 CC =			gcc
 AR =			ar rcs
-CFLAGS =		-g $(INCLUDES)
+CFLAGS =		-Wall -Wextra -Werror -g $(INCLUDES)
 INCLUDES=		-I ./src/utils/headers -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 LIBFT_DIR =		src/utils/libft
 LIBFT =			$(LIBFT_DIR)/libft.a

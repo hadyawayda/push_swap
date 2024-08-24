@@ -41,14 +41,21 @@ int find_max(t_stack_node *stack) {
 
 int find_optimal_position(t_stack_node *stack, int value)
 {
-	if (!stack) return 0;
-	
-	t_stack_node *current = stack;
-	int position = 0;
-	int min = find_min(stack);
-	int max = find_max(stack);
-	int size = stack_size(stack);
-	
+	t_stack_node	*current;
+	int				position;
+	int				min;
+	int				max;
+	int				size;
+	int				prev_value;
+	int				i;
+
+	if (!stack)
+		return 0;
+	current = stack;
+	position = 0;
+	min = find_min(stack);
+	max = find_max(stack);
+	size = stack_size(stack);
 	if (value < min || value > max)
 	{
 		while (current && current->value != max)
@@ -59,10 +66,15 @@ int find_optimal_position(t_stack_node *stack, int value)
 		return ((position + 1) % size);
 	}
 	current = stack;
-	int prev_value = (current->next) ? current->value : min;
-	for (int i = 0; i < size; i++)
+	if (current->next)
 	{
-		int next_value = (current->next) ? current->next->value : max;
+		prev_value = current->value;
+	}
+	else
+		prev_value = min;
+	i = 0;
+	while (i < size)
+	{
 		if ((value > prev_value && value < current->value) ||
 			(prev_value > current->value && (value > prev_value || value < current->value)))
 		{
@@ -70,7 +82,9 @@ int find_optimal_position(t_stack_node *stack, int value)
 		}
 		prev_value = current->value;
 		current = current->next;
-		if (!current) current = stack;
+		if (!current)
+			current = stack;
+		i++;
 	}
 	return (0);
 }
