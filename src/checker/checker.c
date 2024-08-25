@@ -1,6 +1,6 @@
-#include "../src/utils/headers/push_swap.h"
+#include "../utils/headers/push_swap.h"
 
-void	check_sub(t_stack **a, t_stack **b, char *line)
+void	check_sub(t_stack_node **a, t_stack_node **b, char *line)
 {
 	if (line[2] == 'a')
 		rra(a);
@@ -10,7 +10,7 @@ void	check_sub(t_stack **a, t_stack **b, char *line)
 		rrr(a, b);
 }
 
-char	*check(t_stack **a, t_stack **b, char *line)
+char	*check(t_stack_node **a, t_stack_node **b, char *line)
 {
 	if (line[0] == 's' && line[1] == 'a' && line[2] == '\n')
 		sa(a);
@@ -35,7 +35,7 @@ char	*check(t_stack **a, t_stack **b, char *line)
 	return (get_next_line(0));
 }
 
-void	checker_sub(t_stack **a, t_stack **b, char *line)
+void	checker_sub(t_stack_node **a, t_stack_node **b, char *line)
 {
 	char	*tmp;
 
@@ -54,6 +54,61 @@ void	checker_sub(t_stack **a, t_stack **b, char *line)
 	free(line);
 }
 
+t_stack_node	*ft_sub_process(char **argv)
+{
+	t_stack_node	*a;
+	char	**tmp;
+	int		i;
+	int		j;
+
+	a = NULL;
+	i = 0;
+	tmp = ft_split(argv[1], 32);
+	while (tmp[i])
+	{
+		j = atoi_modified(tmp[i]);
+		stack_add_back(&a, stack_new(j));
+		i++;
+	}
+	ft_freestr(tmp);
+	free(tmp);
+	return (a);
+}
+
+t_stack_node	*ft_process(int argc, char **argv)
+{
+	t_stack_node	*a;
+	int		i;
+	int		j;
+
+	i = 1;
+	a = NULL;
+	if (argc < 2)
+		error();
+	if (argc == 2)
+		a = ft_sub_process(argv);
+	else
+	{
+		while (i < argc)
+		{
+			j = atoi_modified(argv[i]);
+			stack_add_back(&a, stack_new(j));
+			i++;
+		}
+	}
+	return (a);
+}
+
+void print_stack(t_stack_node *a)
+{
+	while (a)
+	{
+		printf("%d ", a->value);
+		a = a->next;
+	}
+	printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
@@ -61,12 +116,14 @@ int	main(int argc, char **argv)
 	char	*line;
 
 	b = NULL;
-	a = process(argc, argv);
+	printf("checker started\n");
+	a = ft_process(argc, argv);
 	if (!a || checkdup(a))
 	{
 		ft_free (&a);
 		ft_error_ch();
 	}
+	print_stack(a);
 	line = get_next_line(0);
 	if (!line && !checksorted(a))
 		write(1, "KO\n", 3);

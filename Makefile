@@ -1,4 +1,5 @@
 NAME =			push_swap
+BONUS =			checker
 CC =			gcc
 AR =			ar rcs
 CFLAGS =		-Wall -Wextra -Werror -g $(INCLUDES)
@@ -26,12 +27,20 @@ SRCS =			src/push_swap.c \
 				src/processors/sort.c \
 				src/processors/stack.c \
 
+BONUS_SRC =		src/checker/checker.c \
+				src/checker/error.c \
+
 OBJS =			$(SRCS:.c=.o)
 
-all:			$(NAME)
+BONUS_OBJ =		$(BONUS_SRC:.c=.o)
+
+all:			$(NAME) $(BONUS)
 
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+
+$(BONUS):		$(BONUS_OBJ) $(LIBFT)
+				@$(CC) $(CFLAGS) -o $(BONUS) $(BONUS_OBJ) $(LIBFT)
 
 $(LIBFT):
 				@make --no-print-directory -C $(LIBFT_DIR)
@@ -40,11 +49,11 @@ $(LIBFT):
 				@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				@rm -f $(OBJS)
+				@rm -f $(OBJS) $(BONUS_OBJ)
 				@make --no-print-directory clean -C $(LIBFT_DIR)
 
 fclean:			clean
-				@rm -f $(NAME)
+				@rm -f $(NAME) $(BONUS)
 				@make --no-print-directory fclean -C $(LIBFT_DIR)
 
 re:				fclean all

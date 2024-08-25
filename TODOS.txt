@@ -1,0 +1,4 @@
+add header files
+check makefile
+fix norminette errors
+make bonus
