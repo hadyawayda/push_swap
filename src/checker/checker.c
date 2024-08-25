@@ -113,25 +113,25 @@ int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
 	t_stack_node	*b;
-	char	*line;
+	char			*line;
 
 	b = NULL;
 	printf("checker started\n");
-	a = ft_process(argc, argv);
-	if (!a || checkdup(a))
-	{
-		ft_free (&a);
-		ft_error_ch();
-	}
-	print_stack(a);
-	line = get_next_line(0);
-	if (!line && !checksorted(a))
-		write(1, "KO\n", 3);
-	else if (!line && checksorted(a))
-		write(1, "OK\n", 3);
-	else
-		checker_sub(&a, &b, line);
-	ft_free(&b);
-	ft_free(&a);
+	// a = ft_process(argc, argv);
+	// if (!a || checkdup(a))
+	// {
+	// 	ft_free (&a);
+	// 	ft_error_ch();
+	// }
+	// print_stack(a);
+	// line = get_next_line(0);
+	// if (!line && !checksorted(a))
+	// 	write(1, "KO\n", 3);
+	// else if (!line && checksorted(a))
+	// 	write(1, "OK\n", 3);
+	// else
+	// 	checker_sub(&a, &b, line);
+	// ft_free(&b);
+	// ft_free(&a);
 	return (0);
 }

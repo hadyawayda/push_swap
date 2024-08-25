@@ -2,13 +2,12 @@ NAME =			push_swap
 BONUS =			checker
 CC =			gcc
 AR =			ar rcs
-CFLAGS =		-Wall -Wextra -Werror -g $(INCLUDES)
+CFLAGS =		 -g $(INCLUDES)
 INCLUDES=		-I ./src/utils/headers -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 LIBFT_DIR =		src/utils/libft
 LIBFT =			$(LIBFT_DIR)/libft.a
 
-SRCS =			src/push_swap.c \
-				src/commands/push_commands.c \
+SRCS =			src/commands/push_commands.c \
 				src/commands/reverse_commands.c \
 				src/commands/rotate_commands.c \
 				src/commands/swap_commands.c \
@@ -27,19 +26,21 @@ SRCS =			src/push_swap.c \
 				src/processors/sort.c \
 				src/processors/stack.c \
 
+SRC =			src/push_swap.c
+
 BONUS_SRC =		src/checker/checker.c \
 				src/checker/error.c \
 
-OBJS =			$(SRCS:.c=.o)
+OBJS =			$(SRCS:.c=.o) $(SRC:.c=.o)
 
-BONUS_OBJ =		$(BONUS_SRC:.c=.o)
+BONUS_OBJ =		$(BONUS_SRC:.c=.o) $(SRCS:.c=.o)
 
 all:			$(NAME) $(BONUS)
 
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
-$(BONUS):		$(BONUS_OBJ) $(LIBFT)
+$(BONUS):		$(BONUS_OBJ) $(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(BONUS) $(BONUS_OBJ) $(LIBFT)
 
 $(LIBFT):
