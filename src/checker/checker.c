@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hawayda <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/26 03:19:50 by hawayda           #+#    #+#             */
+/*   Updated: 2024/08/26 03:19:51 by hawayda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../utils/headers/push_swap.h"
 
 void	check_sub(t_stack_node **a, t_stack_node **b, char *line)
@@ -57,9 +69,9 @@ void	checker_sub(t_stack_node **a, t_stack_node **b, char *line)
 t_stack_node	*ft_sub_process(char **argv)
 {
 	t_stack_node	*a;
-	char	**tmp;
-	int		i;
-	int		j;
+	char			**tmp;
+	int				i;
+	int				j;
 
 	a = NULL;
 	i = 0;
@@ -78,8 +90,8 @@ t_stack_node	*ft_sub_process(char **argv)
 t_stack_node	*ft_process(int argc, char **argv)
 {
 	t_stack_node	*a;
-	int		i;
-	int		j;
+	int				i;
+	int				j;
 
 	i = 1;
 	a = NULL;
@@ -99,7 +111,7 @@ t_stack_node	*ft_process(int argc, char **argv)
 	return (a);
 }
 
-void print_stack(t_stack_node *a)
+void	print_stack(t_stack_node *a)
 {
 	while (a)
 	{
@@ -117,21 +129,21 @@ int	main(int argc, char **argv)
 
 	b = NULL;
 	printf("checker started\n");
-	// a = ft_process(argc, argv);
-	// if (!a || checkdup(a))
-	// {
-	// 	ft_free (&a);
-	// 	ft_error_ch();
-	// }
-	// print_stack(a);
-	// line = get_next_line(0);
-	// if (!line && !checksorted(a))
-	// 	write(1, "KO\n", 3);
-	// else if (!line && checksorted(a))
-	// 	write(1, "OK\n", 3);
-	// else
-	// 	checker_sub(&a, &b, line);
-	// ft_free(&b);
-	// ft_free(&a);
+	a = ft_process(argc, argv);
+	if (!a || checkdup(a))
+	{
+		ft_free(&a);
+		ft_error_ch();
+	}
+	print_stack(a);
+	line = get_next_line(0);
+	if (!line && !checksorted(a))
+		write(1, "KO\n", 3);
+	else if (!line && checksorted(a))
+		write(1, "OK\n", 3);
+	else
+		checker_sub(&a, &b, line);
+	ft_free(&b);
+	ft_free(&a);
 	return (0);
 }

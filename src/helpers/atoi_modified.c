@@ -14,8 +14,8 @@
 
 int	atoi_modified(char *str)
 {
-	int					sign;
-	long long int		i;
+	int				sign;
+	long long int	i;
 
 	sign = 1;
 	i = 0;

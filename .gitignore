@@ -4,7 +4,9 @@ tester/
 *.o
 *.a
 main.c
+checker
+push_swap
 julien-ctx/
+checker_linux
 push_swap_tester/
 push_swap_visualizer/
-checker_linux

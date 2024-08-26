@@ -53,7 +53,7 @@ bool	is_numeric(char **arg, int i)
 
 void	process(t_stack_node **a, char **list, int i)
 {
-	int				value;
+	int	value;
 
 	if (!is_numeric(list, i))
 		return ;
@@ -67,7 +67,7 @@ void	process(t_stack_node **a, char **list, int i)
 
 void	subprocess(t_stack_node **a, char **argv)
 {
-	char			**list;
+	char	**list;
 
 	list = ft_split(argv[1], ' ');
 	process(a, list, 0);

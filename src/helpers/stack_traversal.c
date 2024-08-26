@@ -17,7 +17,7 @@ t_stack_node	*ft_lstlast(t_stack_node *lst)
 	if (!lst)
 		return (NULL);
 	while (lst->next)
-		lst = lst -> next;
+		lst = lst->next;
 	return (lst);
 }
 
@@ -29,7 +29,7 @@ int	stack_size(t_stack_node *stack)
 	while (stack)
 	{
 		size++;
-		stack = stack -> next;
+		stack = stack->next;
 	}
 	return (size);
 }

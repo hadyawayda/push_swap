@@ -14,7 +14,7 @@
 
 int	find_min(t_stack_node *stack)
 {
-	int min;
+	int	min;
 
 	min = INT_MAX;
 	while (stack)
@@ -26,8 +26,9 @@ int	find_min(t_stack_node *stack)
 	return (min);
 }
 
-int find_max(t_stack_node *stack) {
-	int max;
+int	find_max(t_stack_node *stack)
+{
+	int	max;
 
 	max = INT_MIN;
 	while (stack)
@@ -39,63 +40,62 @@ int find_max(t_stack_node *stack) {
 	return (max);
 }
 
-int find_optimal_position(t_stack_node *stack, int value)
+int	iterate_over_stack(t_stack_node **stack, t_stack_node *current, int value,
+		int prev_value)
 {
-	t_stack_node	*current;
-	int				position;
-	int				min;
-	int				max;
-	int				size;
-	int				prev_value;
-	int				i;
+	int	i;
 
-	if (!stack)
-		return 0;
-	current = stack;
-	position = 0;
-	min = find_min(stack);
-	max = find_max(stack);
-	size = stack_size(stack);
-	if (value < min || value > max)
-	{
-		while (current && current->value != max)
-		{
-			position++;
-			current = current->next;
-		}
-		return ((position + 1) % size);
-	}
-	current = stack;
-	if (current->next)
-	{
-		prev_value = current->value;
-	}
-	else
-		prev_value = min;
 	i = 0;
-	while (i < size)
+	while (i < stack_size(*stack))
 	{
-		if ((value > prev_value && value < current->value) ||
-			(prev_value > current->value && (value > prev_value || value < current->value)))
-		{
+		if ((value > prev_value && value < current->value)
+			|| (prev_value > current->value && (value > prev_value
+					|| value < current->value)))
 			return (i);
-		}
 		prev_value = current->value;
 		current = current->next;
 		if (!current)
-			current = stack;
+			current = *stack;
 		i++;
 	}
 	return (0);
 }
 
-int calculate_cost(t_stack_node *stack_a, t_stack_node *stack_b, int pos_a, int pos_b)
+int	find_optimal_position(t_stack_node *stack, int value)
 {
-	int size_a;
-	int size_b;
-	int cost_a;
-	int cost_b;
-	
+	t_stack_node	*current;
+	int				position;
+	int				prev_value;
+
+	if (!stack)
+		return (0);
+	current = stack;
+	position = 0;
+	if (value < find_min(stack) || value > find_max(stack))
+	{
+		while (current && current->value != find_max(stack))
+		{
+			position++;
+			current = current->next;
+		}
+		return ((position + 1) % stack_size(stack));
+	}
+	current = stack;
+	if (current->next)
+		prev_value = current->value;
+	else
+		prev_value = find_min(stack);
+	return (iterate_over_stack(&stack, current, value, prev_value));
+}
+
+int	calculate_cost(t_stack_node *stack_a, t_stack_node *stack_b, int pos_a,
+		int pos_b)
+{
+	int	size_a;
+	int	size_b;
+	int	cost_a;
+	int	cost_b;
+
 	size_a = stack_size(stack_a);
 	size_b = stack_size(stack_b);
 	if (pos_a <= size_a / 2)
@@ -106,14 +106,14 @@ int calculate_cost(t_stack_node *stack_a, t_stack_node *stack_b, int pos_a, int 
 		cost_b = pos_b;
 	else
 		cost_b = size_b - pos_b;
-	if ((pos_a <= size_a / 2 && pos_b <= size_b / 2) || 
-		(pos_a > size_a / 2 && pos_b > size_b / 2))
+	if ((pos_a <= size_a / 2 && pos_b <= size_b / 2) || (pos_a > size_a / 2
+			&& pos_b > size_b / 2))
 	{
 		if (cost_a > cost_b)
 			return (cost_a);
 		else
 			return (cost_b);
-	} 
+	}
 	else
 		return (cost_a + cost_b);
 }

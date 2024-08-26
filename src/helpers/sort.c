@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hawayda <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 03:47:57 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/20 03:47:58 by hawayda          ###   ########.fr       */
+/*   Updated: 2024/08/26 06:38:41 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	sort_three_stack(t_stack_node **a)
 
 void	sort_large_stack(t_stack_node **a)
 {
-	t_stack_node *b;
+	t_stack_node	*b;
 
 	b = NULL;
 	if (stack_size(*a) > 4)
@@ -56,6 +56,6 @@ void	sort_large_stack(t_stack_node **a)
 	while (stack_size(*a) > 3)
 		calculate_cheapest(a, &b);
 	sort_three_stack(a);
-	merge_stackB_to_stackA(a, &b);
+	merge_stacks(a, &b);
 	final_arrangement(a);
 }
