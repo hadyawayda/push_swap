@@ -61,59 +61,49 @@ int	iterate_over_stack(t_stack_node **stack, t_stack_node *current, int value,
 	return (0);
 }
 
-int	find_optimal_position(t_stack_node *stack, int value)
+int find_optimal_position_increasing(t_stack_node *stack, int value)
 {
-	t_stack_node	*current;
-	int				position;
-	int				prev_value;
+    t_stack_node	*current;
+    int				position;
+    int				prev_value;
 
-	if (!stack)
-		return (0);
-	current = stack;
-	position = 0;
-	if (value < find_min(stack) || value > find_max(stack))
-	{
-		while (current && current->value != find_max(stack))
-		{
-			position++;
-			current = current->next;
-		}
-		return ((position + 1) % stack_size(stack));
-	}
-	current = stack;
-	if (current->next)
-		prev_value = current->value;
-	else
-		prev_value = find_min(stack);
-	return (iterate_over_stack(&stack, current, value, prev_value));
+    if (!stack)
+        return (0);
+    current = stack;
+    position = 0;
+    if (value < find_min(stack) || value > find_max(stack))
+    {
+        while (current && current->value != find_max(stack))
+        {
+            position++;
+            current = current->next;
+        }
+        return ((position + 1) % stack_size(stack));
+    }
+    current = stack;
+    if (current->next)
+        prev_value = current->value;
+    else
+        prev_value = find_min(stack);
+    return (iterate_over_stack(&stack, current, value, prev_value));
 }
 
-int	calculate_cost(t_stack_node *stack_a, t_stack_node *stack_b, int pos_a,
-		int pos_b)
+int iterate_over_stack_decreasing(t_stack_node **stack, t_stack_node *current, int value, int prev_value)
 {
-	int	size_a;
-	int	size_b;
-	int	cost_a;
-	int	cost_b;
+	int	i;
 
-	size_a = stack_size(stack_a);
-	size_b = stack_size(stack_b);
-	if (pos_a <= size_a / 2)
-		cost_a = pos_a;
-	else
-		cost_a = size_a - pos_a;
-	if (pos_b <= size_b / 2)
-		cost_b = pos_b;
-	else
-		cost_b = size_b - pos_b;
-	if ((pos_a <= size_a / 2 && pos_b <= size_b / 2) || (pos_a > size_a / 2
-			&& pos_b > size_b / 2))
+	i = 0;
+	while (i < stack_size(*stack))
 	{
-		if (cost_a > cost_b)
-			return (cost_a);
-		else
-			return (cost_b);
+		if ((value < prev_value && value > current->value)
+			|| (prev_value < current->value && (value < prev_value
+					|| value > current->value)))
+			return (i);
+		prev_value = current->value;
+		current = current->next;
+		if (!current)
+			current = *stack;
+		i++;
 	}
-	else
-		return (cost_a + cost_b);
+	return (0);
 }

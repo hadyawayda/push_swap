@@ -42,7 +42,7 @@ void	merge_stacks(t_stack_node **a, t_stack_node **b)
 
 	while (*b)
 	{
-		pos_a = find_optimal_position(*a, (*b)->value);
+        pos_a = find_optimal_position_increasing(*a, (*b)->value);
 		size_a = stack_size(*a);
 		if (pos_a <= size_a / 2)
 		{

@@ -33,13 +33,15 @@ t_stack_node			*ft_lstlast(t_stack_node *lst);
 t_stack_node			*stack_add_back(t_stack_node **stack,
 							t_stack_node *new);
 
+int						find_min(t_stack_node *a);
+int						find_max(t_stack_node *stack);
 int						atoi_modified(char *str);
 int						stack_size(t_stack_node *a);
-int						find_optimal_position(t_stack_node *a, int value);
+int						find_optimal_position_increasing(t_stack_node *a, int value);
 int						calculate_cost(t_stack_node *stack_a,
 							t_stack_node *stack_b, int position_a,
 							int position_b);
-int						find_min(t_stack_node *a);
+int						iterate_over_stack_decreasing(t_stack_node **stack, t_stack_node *current, int value, int prev_value);
 
 bool					checkdup(t_stack_node *a);
 bool					checksorted(t_stack_node *a);
