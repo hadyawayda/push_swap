@@ -38,9 +38,6 @@ int						find_max(t_stack_node *stack);
 int						atoi_modified(char *str);
 int						stack_size(t_stack_node *a);
 int						find_optimal_position_increasing(t_stack_node *a, int value);
-int						calculate_cost(t_stack_node *stack_a,
-							t_stack_node *stack_b, int position_a,
-							int position_b);
 int						iterate_over_stack_decreasing(t_stack_node **stack, t_stack_node *current, int value, int prev_value);
 
 bool					checkdup(t_stack_node *a);
@@ -52,7 +49,7 @@ void					print_stack(t_stack_node *a);
 void					merge_stacks(t_stack_node **a, t_stack_node **b);
 void					final_arrangement(t_stack_node **a);
 void					calculate_cheapest(t_stack_node **a, t_stack_node **b);
-void					process(t_stack_node **a, char **list, int i);
+void					multi_arg_process(t_stack_node **a, char **list);
 void					subprocess(t_stack_node **a, char **argv);
 void					sort(t_stack_node **a);
 void					ft_free(t_stack_node **a);

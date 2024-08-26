@@ -69,7 +69,32 @@ void	subprocess(t_stack_node **a, char **argv)
 {
 	char	**list;
 
-	list = ft_split(argv[1], ' ');
+	list = ft_split_charset(argv[1], " \n\t\v\f\r");
+	process(a, list, 0);
+	ft_freestr(list);
+}
+
+void	multi_arg_process(t_stack_node **a, char **argv)
+{
+	char	*combined_args;
+	char	**list;
+	int		i;
+	char	*tmp;
+
+	combined_args = ft_strjoin(argv[1], " ");
+	i = 2;
+	while (argv[i])
+	{
+		tmp = combined_args;
+		combined_args = ft_strjoin(combined_args, argv[i]);
+		free(tmp);
+		tmp = combined_args;
+		combined_args = ft_strjoin(combined_args, " ");
+		free(tmp);
+		i++;
+	}
+	list = ft_split_charset(combined_args, " \n\t\v\f\r");
+	free(combined_args);
 	process(a, list, 0);
 	ft_freestr(list);
 }

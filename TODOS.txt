@@ -1,6 +1,6 @@
-check makefile
-fix norminette errors
+fix norminette errors AGAIN
+check makefile -- Done
 make bonus
 
-accept two or more quoted arguments and parse them as a single list of integers
-accept different types of seperators in ft_split
+accept two or more quoted arguments and parse them as a single list of integers -- Done
+accept different types of seperators in ft_split -- Done

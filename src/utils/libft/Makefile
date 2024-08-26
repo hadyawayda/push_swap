@@ -43,7 +43,8 @@ SRCS = ft_atoi.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	get_next_line.c \
-	ft_strjoin_and_free.c
+	ft_strjoin_and_free.c \
+	ft_split_charset.c \
 
 OBJS =			$(SRCS:.c=.o)
 

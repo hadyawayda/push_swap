@@ -22,6 +22,6 @@ t_stack_node	*pre_process(int argc, char **argv)
 	if (argc == 2)
 		subprocess(&a, argv);
 	else
-		process(&a, argv, 1);
+		multi_arg_process(&a, argv);
 	return (a);
 }
