@@ -69,6 +69,5 @@ void					ss(t_stack_node **a, t_stack_node **b);
 void					rra(t_stack_node **a);
 void					rrb(t_stack_node **b);
 void					rrr(t_stack_node **a, t_stack_node **b);
-void					ft_error_ch(void);
 
 #endif

@@ -12,113 +12,80 @@
 
 #include "../utils/headers/push_swap.h"
 
-void	check_sub(t_stack_node **a, t_stack_node **b, char *line)
+void	ft_error_ch(void)
 {
-	if (line[2] == 'a')
-		rra(a);
-	else if (line[2] == 'b')
-		rrb(b);
-	else if (line[2] == 'r')
-		rrr(a, b);
+	write(1, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
-char	*check(t_stack_node **a, t_stack_node **b, char *line)
+void	execute_command(t_stack_node **a, t_stack_node **b, char *line)
 {
-	if (line[0] == 's' && line[1] == 'a' && line[2] == '\n')
+	if (ft_strncmp(line, "sa\n", 3) == 0)
 		sa(a);
-	else if (line[0] == 's' && line[1] == 'b' && line[2] == '\n')
+	else if (ft_strncmp(line, "sb\n", 3) == 0)
 		sb(b);
-	else if (line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
-		pa(a, b);
-	else if (line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
-		pb(a, b);
-	else if (line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
-		ra(a);
-	else if (line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
-		rb(b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[3] == '\n')
-		check_sub(a, b, line);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == '\n')
-		rr(a, b);
-	else if (line[0] == 's' && line[1] == 's' && line[2] == '\n')
+	else if (ft_strncmp(line, "ss\n", 3) == 0)
 		ss(a, b);
+	else if (ft_strncmp(line, "pa\n", 3) == 0)
+		pa(a, b);
+	else if (ft_strncmp(line, "pb\n", 3) == 0)
+		pb(a, b);
+	else if (ft_strncmp(line, "ra\n", 3) == 0)
+		ra(a);
+	else if (ft_strncmp(line, "rb\n", 3) == 0)
+		rb(b);
+	else if (ft_strncmp(line, "rr\n", 3) == 0)
+		rr(a, b);
+	else if (ft_strncmp(line, "rra\n", 4) == 0)
+		rra(a);
+	else if (ft_strncmp(line, "rrb\n", 4) == 0)
+		rrb(b);
+	else if (ft_strncmp(line, "rrr\n", 4) == 0)
+		rrr(a, b);
 	else
 		ft_error_ch();
-	return (get_next_line(0));
 }
 
 void	checker_sub(t_stack_node **a, t_stack_node **b, char *line)
 {
-	char	*tmp;
-
-	while (line && *line != '\n')
+	while (line)
 	{
-		tmp = line;
-		line = check(a, b, line);
-		free(tmp);
+		execute_command(a, b, line);
+		free(line);
+		line = get_next_line(0);
 	}
-	if (*b)
-		write(1, "KO\n", 3);
-	else if (!checksorted(*a))
+	if (*b || !checksorted(*a))
 		write(1, "KO\n", 3);
 	else
 		write(1, "OK\n", 3);
-	free(line);
-}
-
-t_stack_node	*ft_sub_process(char **argv)
-{
-	t_stack_node	*a;
-	char			**tmp;
-	int				i;
-	int				j;
-
-	a = NULL;
-	i = 0;
-	tmp = ft_split(argv[1], 32);
-	while (tmp[i])
-	{
-		j = atoi_modified(tmp[i]);
-		stack_add_back(&a, stack_new(j));
-		i++;
-	}
-	ft_freestr(tmp);
-	free(tmp);
-	return (a);
 }
 
 t_stack_node	*ft_process(int argc, char **argv)
 {
 	t_stack_node	*a;
+	char			*combined_args;
+	char			**list;
 	int				i;
-	int				j;
 
-	i = 1;
 	a = NULL;
-	if (argc < 2)
-		error();
-	if (argc == 2)
-		a = ft_sub_process(argv);
-	else
+	combined_args = ft_strdup("");
+	i = 1;
+	while (i < argc)
 	{
-		while (i < argc)
-		{
-			j = atoi_modified(argv[i]);
-			stack_add_back(&a, stack_new(j));
-			i++;
-		}
+		char *tmp = combined_args;
+		combined_args = ft_strjoin(combined_args, argv[i]);
+		free(tmp);
+		tmp = combined_args;
+		combined_args = ft_strjoin(combined_args, " ");
+		free(tmp);
+		i++;
 	}
+	list = ft_split(combined_args, ' ');
+	free(combined_args);
+	for (i = 0; list[i]; i++)
+		stack_add_back(&a, stack_new(atoi_modified(list[i])));
+	ft_freestr(list);
 	return (a);
-}
-
-void	print_stack(t_stack_node *a)
-{
-	while (a)
-	{
-		printf("%d ", a->value);
-		a = a->next;
-	}
-	printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -127,22 +94,17 @@ int	main(int argc, char **argv)
 	t_stack_node	*b;
 	char			*line;
 
+	if (argc < 2)
+		return (0);
 	b = NULL;
-	printf("checker started\n");
 	a = ft_process(argc, argv);
 	if (!a || checkdup(a))
 	{
 		ft_free(&a);
 		ft_error_ch();
 	}
-	print_stack(a);
 	line = get_next_line(0);
-	if (!line && !checksorted(a))
-		write(1, "KO\n", 3);
-	else if (!line && checksorted(a))
-		write(1, "OK\n", 3);
-	else
-		checker_sub(&a, &b, line);
+	checker_sub(&a, &b, line);
 	ft_free(&b);
 	ft_free(&a);
 	return (0);
