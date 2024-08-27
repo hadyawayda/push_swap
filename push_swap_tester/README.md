@@ -1,87 +1,43 @@
-# push_swap_tester
+# complexity
 
-### Usage
+## Build
 
-First, go to the root of your repository, which is where we can find your Makefile and do
+Compile with the following command
 
-```git clone https://github.com/LeoFu9487/push_swap_tester.git && cd push_swap_tester```
+`make [fr|en]`
 
+## Usage
 
+**./complexity** \[**-vh**\] \[**-s** <ins>seed</ins>\] \[**-f** <ins>push_swap</ins>\] \[**--sorted**\] <ins>numbers</ins> <ins>iterations</ins> \[<ins>goal</ins>\] \[<ins>checker</ins>\]
 
+L'exécutable push_swap est cherché par défaut dans le répertoire courant et parent.
 
-To see if you pass the parsing test (ERROR_TEST), identity test, and small stack test (size 3 and 5), run
+Les options suivantes sont disponibles :
 
-```bash basic_test.sh```
+**-v**, **--version**\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Affiche la version du testeur
 
+**-h**, **--help**\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Affiche l'aide.
 
+**-s** <ins>seed</ins>, **--seed**=<ins>seed</ins>\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Génère les nombres en fonction de la graine.
 
-If you want to see the test cases, check ```trace_basic```
+**-o** <ins>output</ins>, **--output**=<ins>output</ins>\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spécifie un fichier de sortie pour les logs.
 
+**-f** <ins>push_swap</ins>, **--file**=<ins>push_swap</ins>\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utilise <ins>push_swap</ins> en tant qu'exécutable push_swap.
 
-After that, you can do medium and big stack test with this command
+**--sorted**\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Envoie uniquement des nombres triés au programme.
 
-```bash loop.sh <stack size> <loop times>```
+### Demo :
 
-For example, this is the result of the following command
+![Demo Animation for 100 elements](../assets/v1.6.0-100-100-checker.gif)
+![Demo Animation for 500 elements](../assets/v1.6.0-500-100.gif)
 
-```bash loop.sh 100 10```
+---
 
-![example](https://user-images.githubusercontent.com/70040774/118051305-0b7fa580-b381-11eb-9568-36b44748b10f.png)
-
-And you can find those generated test cases and the output of your program in ```trace_loop```
-
-### Debug
-
-To visualize how your program sorts numbers
-
-```bash debug.sh <numbers>```
-
-This is the result of the following command
-
-```bash debug.sh 9 4 8 7```
-
-![debugsh](https://user-images.githubusercontent.com/70040774/119276699-d6464380-bc1b-11eb-8c03-fe01a11b494f.png)
-
-To generate random numbers and visualize how your program sorts them, run  
-
-```bash debug.sh random <stack size>```
-
-This is the result of the following command
-
-```bash debug.sh random 10```
-
-![example2](https://user-images.githubusercontent.com/70040774/118052309-cceaea80-b382-11eb-8c9d-39675e9143ba.png)
-
-To generate a permutation of numbers from 0 to n-1
-
-```bash debug.sh clean <stack size>```
-
-this is the result of the following command
-
-```bash debug.sh clean 10```
-
-![example3](https://user-images.githubusercontent.com/70040774/118052350-daa07000-b382-11eb-95e4-c8715f70cc05.png)
-
-### Result 
-
-OK : Answer Correct
-
-KO : Wrong Answer
-
-TLE : Time Limit Exceeded, please check if there is an infinite loop in your program (or you can edit the variable ```TIME_LIMIT``` in *.sh file)
-
-ERROR : Unknown Instructions
-
-leaks command not found : can't test your memory with command ```leaks``` (If you're using MacOS but still receiving this, remove ```-fsanitize=address``` flag in your Makefile )
-
-### Clean
-
-```bash clean.sh```
-
-can remove every test case and output file
-
-### Contact : 
-
-yfu@student.42lyon.fr
-
-or DM me on the slack
+Merci à [@mhouppin](https://github.com/mhouppin) pour l'inspiration visuelle du testeur.\
+Thanks to [@42cursus-youkim](https://github.com/42cursus-youkim) for the translations.
