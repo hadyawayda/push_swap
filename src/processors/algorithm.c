@@ -12,7 +12,7 @@
 
 #include "../headers/push_swap.h"
 
-int find_optimal_position(t_stack_node *stack, int value)
+int	find_optimal_position(t_stack_node *stack, int value)
 {
 	t_stack_node	*current;
 	int				position;
@@ -22,7 +22,6 @@ int find_optimal_position(t_stack_node *stack, int value)
 		return (0);
 	current = stack;
 	position = 0;
-
 	if (value > find_max(stack) || value < find_min(stack))
 	{
 		while (current && current->value != find_min(stack))
@@ -37,7 +36,6 @@ int find_optimal_position(t_stack_node *stack, int value)
 		prev_value = current->value;
 	else
 		prev_value = find_max(stack);
-
 	return (iterate_over_stack_decreasing(&stack, current, value, prev_value));
 }
 

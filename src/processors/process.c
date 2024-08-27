@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hawayda <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 03:22:30 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/21 03:22:31 by hawayda          ###   ########.fr       */
+/*   Updated: 2024/08/26 23:45:53 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,13 @@ void	multi_arg_process(t_stack_node **a, char **argv)
 	char	*combined_args;
 	char	**list;
 	int		i;
-	char	*tmp;
 
-	combined_args = ft_strjoin(argv[1], " ");
-	i = 2;
+	combined_args = ft_strdup("");
+	i = 1;
 	while (argv[i])
 	{
-		tmp = combined_args;
-		combined_args = ft_strjoin(combined_args, argv[i]);
-		free(tmp);
-		tmp = combined_args;
-		combined_args = ft_strjoin(combined_args, " ");
-		free(tmp);
-		i++;
+		combined_args = ft_strjoin_and_free(combined_args, argv[i++]);
+		combined_args = ft_strjoin_and_free(combined_args, " ");
 	}
 	list = ft_split_charset(combined_args, " \n\t\v\f\r");
 	free(combined_args);

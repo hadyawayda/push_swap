@@ -6,7 +6,7 @@
 /*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 01:23:30 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/26 06:38:27 by hawayda          ###   ########.fr       */
+/*   Updated: 2024/08/26 23:17:55 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	merge_stacks(t_stack_node **a, t_stack_node **b)
 
 	while (*b)
 	{
-        pos_a = find_optimal_position_increasing(*a, (*b)->value);
+		pos_a = find_optimal_position_increasing(*a, (*b)->value);
 		size_a = stack_size(*a);
 		if (pos_a <= size_a / 2)
 		{

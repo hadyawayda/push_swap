@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 02:59:31 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/27 02:59:32 by hawayda          ###   ########.fr       */
+/*   Created: 2024/08/27 03:55:36 by hawayda           #+#    #+#             */
+/*   Updated: 2024/08/27 03:55:37 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils/headers/push_swap.h"
+#include "../utils/headers/push_swap.h"
 
-int	main(int argc, char **argv)
+void	swap_both(t_stack_node **a, t_stack_node **b)
 {
-	t_stack_node	*a;
+	swap_m(a);
+	swap_m(b);
+}
 
-	a = pre_process(argc, argv);
-	if (!a || checkdup(a))
-	{
-		ft_free(&a);
-		error();
-	}
-	if (!checksorted(a))
-		sort(&a);
-	ft_free(&a);
-	return (0);
+void	rotate_both(t_stack_node **a, t_stack_node **b)
+{
+	rotate_m(a);
+	rotate_m(b);
+}
+
+void	reverse_rotate_both(t_stack_node **a, t_stack_node **b)
+{
+	reverse_rotate_m(a);
+	reverse_rotate_m(b);
 }

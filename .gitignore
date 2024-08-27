@@ -3,8 +3,8 @@ tester/
 *.out
 *.o
 *.a
+*.sh
 main.c
-checker
 push_swap
 julien-ctx/
 checker_linux

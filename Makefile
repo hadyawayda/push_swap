@@ -29,6 +29,8 @@ SRCS =			src/commands/push_commands.c \
 SRC =			src/push_swap.c
 
 BONUS_SRC =		src/checker/checker.c \
+				src/checker/modified_commands.c \
+				src/checker/helpers.c \
 
 OBJS =			$(SRCS:.c=.o) $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:38:52 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/26 06:38:50 by hawayda          ###   ########.fr       */
+/*   Updated: 2024/08/26 23:22:23 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int						find_min(t_stack_node *a);
 int						find_max(t_stack_node *stack);
 int						atoi_modified(char *str);
 int						stack_size(t_stack_node *a);
-int						find_optimal_position_increasing(t_stack_node *a, int value);
-int						iterate_over_stack_decreasing(t_stack_node **stack, t_stack_node *current, int value, int prev_value);
+int						find_optimal_position_increasing(t_stack_node *a,
+							int value);
+int						iterate_over_stack_decreasing(t_stack_node **stack,
+							t_stack_node *current, int value, int prev_value);
 
 bool					checkdup(t_stack_node *a);
 bool					checksorted(t_stack_node *a);
@@ -69,5 +71,12 @@ void					ss(t_stack_node **a, t_stack_node **b);
 void					rra(t_stack_node **a);
 void					rrb(t_stack_node **b);
 void					rrr(t_stack_node **a, t_stack_node **b);
+void					push_m(t_stack_node **src, t_stack_node **dst);
+void					swap_m(t_stack_node **stack);
+void					rotate_m(t_stack_node **stack);
+void					reverse_rotate_m(t_stack_node **stack);
+void					swap_both(t_stack_node **a, t_stack_node **b);
+void					rotate_both(t_stack_node **a, t_stack_node **b);
+void					reverse_rotate_both(t_stack_node **a, t_stack_node **b);
 
 #endif

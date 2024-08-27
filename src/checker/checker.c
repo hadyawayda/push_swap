@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hawayda <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 03:19:50 by hawayda           #+#    #+#             */
-/*   Updated: 2024/08/26 03:19:51 by hawayda          ###   ########.fr       */
+/*   Updated: 2024/08/26 23:42:15 by hawayda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,32 @@ void	ft_error_ch(void)
 void	execute_command(t_stack_node **a, t_stack_node **b, char *line)
 {
 	if (ft_strncmp(line, "sa\n", 3) == 0)
-		sa(a);
+		swap_m(a);
 	else if (ft_strncmp(line, "sb\n", 3) == 0)
-		sb(b);
+		swap_m(b);
 	else if (ft_strncmp(line, "ss\n", 3) == 0)
-		ss(a, b);
+		swap_both(a, b);
 	else if (ft_strncmp(line, "pa\n", 3) == 0)
-		pa(a, b);
+		push_m(b, a);
 	else if (ft_strncmp(line, "pb\n", 3) == 0)
-		pb(a, b);
+		push_m(a, b);
 	else if (ft_strncmp(line, "ra\n", 3) == 0)
-		ra(a);
+		rotate_m(a);
 	else if (ft_strncmp(line, "rb\n", 3) == 0)
-		rb(b);
+		rotate_m(b);
 	else if (ft_strncmp(line, "rr\n", 3) == 0)
-		rr(a, b);
+		rotate_both(a, b);
 	else if (ft_strncmp(line, "rra\n", 4) == 0)
-		rra(a);
+		reverse_rotate_m(a);
 	else if (ft_strncmp(line, "rrb\n", 4) == 0)
-		rrb(b);
+		reverse_rotate_m(b);
 	else if (ft_strncmp(line, "rrr\n", 4) == 0)
-		rrr(a, b);
+		reverse_rotate_both(a, b);
 	else
 		ft_error_ch();
 }
 
-void	checker_sub(t_stack_node **a, t_stack_node **b, char *line)
+void	extract_lines(t_stack_node **a, t_stack_node **b, char *line)
 {
 	while (line)
 	{
@@ -60,7 +60,7 @@ void	checker_sub(t_stack_node **a, t_stack_node **b, char *line)
 		write(1, "OK\n", 3);
 }
 
-t_stack_node	*ft_process(int argc, char **argv)
+t_stack_node	*process_checker(int argc, char **argv)
 {
 	t_stack_node	*a;
 	char			*combined_args;
@@ -72,18 +72,14 @@ t_stack_node	*ft_process(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		char *tmp = combined_args;
-		combined_args = ft_strjoin(combined_args, argv[i]);
-		free(tmp);
-		tmp = combined_args;
-		combined_args = ft_strjoin(combined_args, " ");
-		free(tmp);
-		i++;
+		combined_args = ft_strjoin_and_free(combined_args, argv[i++]);
+		combined_args = ft_strjoin_and_free(combined_args, " ");
 	}
 	list = ft_split(combined_args, ' ');
 	free(combined_args);
-	for (i = 0; list[i]; i++)
-		stack_add_back(&a, stack_new(atoi_modified(list[i])));
+	i = 0;
+	while (list[i])
+		stack_add_back(&a, stack_new(atoi_modified(list[i++])));
 	ft_freestr(list);
 	return (a);
 }
@@ -97,14 +93,14 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	b = NULL;
-	a = ft_process(argc, argv);
+	a = process_checker(argc, argv);
 	if (!a || checkdup(a))
 	{
 		ft_free(&a);
 		ft_error_ch();
 	}
 	line = get_next_line(0);
-	checker_sub(&a, &b, line);
+	extract_lines(&a, &b, line);
 	ft_free(&b);
 	ft_free(&a);
 	return (0);

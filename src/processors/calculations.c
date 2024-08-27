@@ -61,34 +61,35 @@ int	iterate_over_stack(t_stack_node **stack, t_stack_node *current, int value,
 	return (0);
 }
 
-int find_optimal_position_increasing(t_stack_node *stack, int value)
+int	find_optimal_position_increasing(t_stack_node *stack, int value)
 {
-    t_stack_node	*current;
-    int				position;
-    int				prev_value;
+	t_stack_node	*current;
+	int				position;
+	int				prev_value;
 
-    if (!stack)
-        return (0);
-    current = stack;
-    position = 0;
-    if (value < find_min(stack) || value > find_max(stack))
-    {
-        while (current && current->value != find_max(stack))
-        {
-            position++;
-            current = current->next;
-        }
-        return ((position + 1) % stack_size(stack));
-    }
-    current = stack;
-    if (current->next)
-        prev_value = current->value;
-    else
-        prev_value = find_min(stack);
-    return (iterate_over_stack(&stack, current, value, prev_value));
+	if (!stack)
+		return (0);
+	current = stack;
+	position = 0;
+	if (value < find_min(stack) || value > find_max(stack))
+	{
+		while (current && current->value != find_max(stack))
+		{
+			position++;
+			current = current->next;
+		}
+		return ((position + 1) % stack_size(stack));
+	}
+	current = stack;
+	if (current->next)
+		prev_value = current->value;
+	else
+		prev_value = find_min(stack);
+	return (iterate_over_stack(&stack, current, value, prev_value));
 }
 
-int iterate_over_stack_decreasing(t_stack_node **stack, t_stack_node *current, int value, int prev_value)
+int	iterate_over_stack_decreasing(t_stack_node **stack, t_stack_node *current,
+		int value, int prev_value)
 {
 	int	i;
 
