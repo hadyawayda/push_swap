@@ -6,7 +6,6 @@ tester/
 *.sh
 main.c
 push_swap
-julien-ctx/
 checker_linux
-push_swap_tester/
-push_swap_visualizer/
+# push_swap_tester/
+# push_swap_visualizer/
